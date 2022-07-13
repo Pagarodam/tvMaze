@@ -5,6 +5,7 @@ import styles from './showList.module.css';
 
 
 
+
 const ShowList= () => {
 
     const [error, setError] = useState(null);
@@ -18,14 +19,14 @@ const ShowList= () => {
             (result) => {
               setIsLoaded(true);
               setItems(result);
-              console.log("items", items)
             },
             (error) => {
-              setIsLoaded(true);
-              setError(error);
+                setIsLoaded(true);
+                setError(error);
             }
-        )
-    }, [])
+            )
+        }, [])
+        console.log("items", items)
 
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -36,13 +37,20 @@ const ShowList= () => {
            <ShowListCard>
                 {items.map(item => (
                     <li className={styles.showListLi} key={item.show.id}>
-                        <p>Name: {item.show.name} </p>
-                        { item.show.summary &&
+                        <div>
                             <div>
-                                Summary:
-                                <p dangerouslySetInnerHTML= {{__html: item.show.summary}}></p>
+                                <img src={item.show.image.medium} alt="Logo" />
                             </div>
-                        }
+                            <div>
+                                <p>Name: {item.show.name} </p>
+                                { item.show.summary &&
+                                    <div>
+                                        Summary:
+                                        <p dangerouslySetInnerHTML= {{__html: item.show.summary}}></p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
                         <Button label="Show"/>
                     </li>
                 ))}
