@@ -3,9 +3,6 @@ import Button from "../Components/Button/Button";
 import ShowListCard from "./showListCard/showListCard";
 import styles from './showList.module.css';
 
-
-
-
 const ShowList= () => {
 
     const [error, setError] = useState(null);
@@ -37,11 +34,11 @@ const ShowList= () => {
            <ShowListCard>
                 {items.map(item => (
                     <li className={styles.showListLi} key={item.show.id}>
-                        <div>
-                            <div>
+                        <div className={styles.wrapper}>
+                            <div className={styles.one}>
                                 <img src={item.show.image.medium} alt="Logo" />
                             </div>
-                            <div>
+                            <div className={styles.two}>
                                 <p>Name: {item.show.name} </p>
                                 { item.show.summary &&
                                     <div>
@@ -51,7 +48,9 @@ const ShowList= () => {
                                 }
                             </div>
                         </div>
-                        <Button label="Show"/>
+                        <Button images={item.show.image.medium} review={item.show.rating.average} 
+                            summary={item.show.summary}  label="Show"   
+                        />
                     </li>
                 ))}
             </ShowListCard>
